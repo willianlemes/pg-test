@@ -4,9 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js --ignore __tests__"    
   },
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "nodemon": "^2.0.7"
   }
 }
