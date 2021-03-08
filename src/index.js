@@ -1,6 +1,5 @@
 const fs = require("fs");
 const { Agenda } = require("./models/Agenda");
-
 const {
   validarDDD,
   validarTelefone,
@@ -11,8 +10,10 @@ const {
   stringToTime,
 } = require("./helpers");
 
+const enderecoDoArquivo = "./regex.txt";
+
 //Alterar o endereço para o destino do arquivo que será carregado
-fs.readFile("./regex.txt", "utf-8", async function (err, data) {
+fs.readFile(enderecoDoArquivo, "utf-8", async function (err, data) {
   if (err) throw err;
 
   //Transformando cada linha do arquivo em lista
