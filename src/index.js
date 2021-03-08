@@ -1,4 +1,6 @@
 const fs = require("fs");
+const { Agenda } = require("./models/Agenda");
+
 const {
   validarDDD,
   validarTelefone,
@@ -8,17 +10,19 @@ const {
   getIdBroker,
   stringToTime,
 } = require("./helpers");
-const regDDDValido = new RegExp("[1-9]{2}", "g");
-const testTelefone = new RegExp("9{1}[7-9]\\d{7}", "g");
-const testDDDUFSaoPaulo = new RegExp("1[1-9]", "g");
 
 fs.readFile("./regex.txt", "utf-8", async function (err, data) {
   if (err) throw err;
 
+  //Transformando cada linha do arquivo em lista
   const linhas = data.split("\r\n");
   const mensagensLiberadas = [];
+  let idBroker = "";
+  const agenda = new Agenda();
 
   for (const linha of linhas) {
+    //transformando cada valor separado por ; em um elemento de uma lista
+    //Utilizo desestruturação do array
     const [
       idMensagem,
       ddd,
@@ -40,28 +44,18 @@ fs.readFile("./regex.txt", "utf-8", async function (err, data) {
 
     if (!validarAgendamento(horarioDoAgendamento)) continue;
 
-    const idBroker = getIdBroker(operadora);
+    idBroker = getIdBroker(operadora);
 
-    //Identificar agendamentos pro mesmo endereço
-    msgDeMesmoDestino = mensagensLiberadas.find(({ fone, agendamento }) => {
-      return fone === telefoneCompleto && agendamento >= horarioDoAgendamento;
-    });
-
-    if (msgDeMesmoDestino) {
-      mensagensLiberadas.slice(
-        mensagensLiberadas.indexOf(msgDeMesmoDestino),
-        1
-      );
-    }
-
-    mensagensLiberadas.push({
+    agenda.add({
       idMensagem,
-      fone: telefoneCompleto,
-      operadora,
-      agendamento: horarioDoAgendamento,
+      idBroker,
+      telefoneCompleto,
+      horarioDoAgendamento,
       mensagem,
     });
+  }
 
-    console.log(`${idMensagem};${idBroker}`);
+  for (const mensagem of mensagensLiberadas) {
+    console.log(`${mensagem.idMensagem};${idBroker}`);
   }
 });

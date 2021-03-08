@@ -1,3 +1,4 @@
+//Criei uma função de conversão de string para time (time = milisegundos)
 function stringToTime(timeString) {
   const dataAtual = new Date();
   const [hora, min, seg] = timeString.split(":");
