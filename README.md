@@ -5,6 +5,9 @@ Após abrir o projeto execute o seguinte comando no terminal para instalar as de
 ```bash
 yarn
 ```
+## Antes de executar o projeto
+
+Na linha 13 do arquivo src/index.js existe um constante que recebe o endereço do arquivo .txt que é lido. Alterar o endereço para o diretório do novo arquivo que será validado. 
 
 ## Executar em produção
 
