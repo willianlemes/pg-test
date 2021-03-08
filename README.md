@@ -9,6 +9,10 @@ yarn
 
 Na linha 13 do arquivo src/index.js existe um constante que recebe o endereço do arquivo .txt que é lido. Alterar o endereço para o diretório do novo arquivo que será validado. 
 
+```javascript
+const enderecoDoArquivo = "./regex.txt";
+```
+
 ## Executar em produção
 
 ```bash
