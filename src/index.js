@@ -11,12 +11,12 @@ const {
   stringToTime,
 } = require("./helpers");
 
+//Alterar o endereço para o destino do arquivo que será carregado
 fs.readFile("./regex.txt", "utf-8", async function (err, data) {
   if (err) throw err;
 
   //Transformando cada linha do arquivo em lista
   const linhas = data.split("\r\n");
-  const mensagensLiberadas = [];
   let idBroker = "";
   const agenda = new Agenda();
 
@@ -55,7 +55,7 @@ fs.readFile("./regex.txt", "utf-8", async function (err, data) {
     });
   }
 
-  for (const mensagem of mensagensLiberadas) {
+  for (const mensagem of agenda.agendamentos) {
     console.log(`${mensagem.idMensagem};${idBroker}`);
   }
 });

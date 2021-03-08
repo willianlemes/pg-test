@@ -8,7 +8,7 @@ class Agenda {
     this._agendamentos = [];
   }
 
-  _getMsgDeMesmoDestino(telefone) {
+  _getMensagemParaMesmoDestino(telefone) {
     //se tiver algum agendamento na lista com o mesmo número de telefone que foi passado por parametro,
     //será retornado o elemento da lista
     return this._agendamentos.find(
@@ -38,7 +38,7 @@ class Agenda {
     mensagem,
   }) {
     //Busco por mensagem para o mesmo destino (destino = telefone)
-    const mensagemParaMesmoDestino = this._getMsgDeMesmoDestino(
+    const mensagemParaMesmoDestino = this._getMensagemParaMesmoDestino(
       telefoneCompleto
     );
 
@@ -57,7 +57,7 @@ class Agenda {
       //Se chegar até aqui, indica que o novo horário de agendamento é menor que o horário que já está agendado, então
       //é removida a mensagem com horário de agendamento maior
       //para que em seguida seja incluída a mensagem com horário menor
-      this._removerAgendamento(msgDeMesmoDestino);
+      this._removerAgendamento(mensagemParaMesmoDestino);
     }
 
     //Inclusão da nova mensagem na lista, considerando os critérios acima
