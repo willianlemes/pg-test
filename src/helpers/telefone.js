@@ -26,14 +26,9 @@ function validarTelefone(telefone) {
 
 async function validarTelefoneBlackList(telefoneCompleto) {
   //Utilizei a lib axios para fazer a chamada do endpoint blacklist
-  try {
-    await axios.get(
-      `https://front-test-pg.herokuapp.com/blacklist/${telefoneCompleto}`
-    );
-    return false;
-  } catch (error) {
-    return true;
-  }
+  return await axios.get(
+    `https://front-test-pg.herokuapp.com/blacklist/${telefoneCompleto}`
+  );
 }
 
 module.exports = {

@@ -38,7 +38,10 @@ fs.readFile("./regex.txt", "utf-8", async function (err, data) {
 
     if (!validarTelefone(telefone)) continue;
 
-    if (!(await validarTelefoneBlackList(telefoneCompleto))) continue;
+    try {
+      await validarTelefoneBlackList(telefoneCompleto);
+      continue;
+    } catch (error) {}
 
     const horarioDoAgendamento = stringToTime(agendamento);
 
